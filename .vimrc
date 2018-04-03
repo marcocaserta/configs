@@ -5,6 +5,9 @@ execute pathogen#infect()
 call pathogen#helptags() " generate helptags for everything in 'runtimepath'
 syntax on
 syntax enable
+syntax spell toplevel
+
+
 " set guifont=Ubuntu\ Mono:h8
 set guifont=DejaVu\ Sans\ Mono\ 7.2
 set linespace=2
@@ -30,8 +33,10 @@ else
     " set background=light
 	set background=dark
     let g:gruvbox_italic=1
-    " set termguicolors
+    " let g:gruvbox_guisp_fallback='bg'
     colorscheme gruvbox
+    " let g:gruvbox_underline =   1
+    " set termguicolors
     " colorscheme solarized
 endif
 
@@ -52,6 +57,12 @@ let mapleader = ","
 " Make check spelling on or off 
 nmap <leader>cson   :set spell<CR>
 nmap <leader>csoff  :set nospell<CR>
+if (has("gui_running"))
+    let s:c = ",undercurl"                                     
+else                                                                         
+    hi clear SpellBad
+    hi SpellBad cterm=underline
+endif
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 "======================================================================="
@@ -202,6 +213,19 @@ let g:Tex_UsePython=1
 let g:Tex_GotoError=1
 let g:Tex_SmartKeyQuote=1
 let g:Tex_ViewRule_pdf='evince'
+
+let g:Tex_IgnoredWarnings =
+\'Underfull'."\n".
+\'Overfull'."\n".
+\'specifier changed to'."\n".
+\'You have requested'."\n".
+\'LaTeX Font Warning:'
+" \'Missing number, treated as zero.'."\n".
+" \'There were undefined references'."\n".
+" \'Citation %.%# undefined'."\n".
+let g:Tex_IgnoreLevel = 8
+
+
 " clang
 "let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 " disable NeoComplete when using LaTeX
@@ -221,6 +245,7 @@ let g:neocomplete#enable_auto_select = 0
 "
 
 " Toggle NERDTree
+nmap <silent> <leader>l :TlistToggle<cr>
 nmap <silent> <leader>k :NERDTreeToggle<cr>
 
 " customization of NERDCommenting
@@ -301,3 +326,15 @@ set wildmenu
 nnoremap ,header :-1read $HOME/.vim/snippets/header.txt<CR>20jA
 " CtrP will find all the files
 
+" Close a buffer without closing a window (e.g., when splits are used)
+command Bd bp\|bd \#
+
+" This is used to have ALT working in terminal mode
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+
+set timeout ttimeoutlen=50
