@@ -39,6 +39,7 @@ fi
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
+# export TERM=screen-256color
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
@@ -136,3 +137,5 @@ if [ -f '/home/marco/google-cloud-sdk/path.bash.inc' ]; then source '/home/marco
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/marco/google-cloud-sdk/completion.bash.inc' ]; then source '/home/marco/google-cloud-sdk/completion.bash.inc'; fi
+
+alias tmux="tmux -2" # for 256 colors

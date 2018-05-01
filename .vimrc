@@ -338,3 +338,12 @@ while c <= 'z'
 endw
 
 set timeout ttimeoutlen=50
+
+syntax enable
+set termguicolors
+
+"============================================================ 
+" the following is used to disable Background Color Erase (BCE)
+" this is needed for tmux
+set t_ut=
+"============================================================ 
