@@ -234,6 +234,12 @@ autocmd FileType bib NeoCompleteLock
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#enable_auto_select = 0
+
+" disable youcompleteme for certain file types
+let g:ycm_filetype_blacklist = {
+    \ 'tex' : 1
+    \}
+
 " <TAB>: completion.
   " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
         " \ <SID>check_back_space() ? "\<TAB>" :
@@ -347,3 +353,7 @@ set termguicolors
 " this is needed for tmux
 set t_ut=
 "============================================================ 
+"
+"
+set foldmethod=indent
+set foldlevel=99
